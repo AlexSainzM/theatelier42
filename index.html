@@ -1,15 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
-    <title>Atelier 42</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atelier 42 | Pastelería Boutique</title>
+    <meta name="description" content="El arte de la pastelería. Una experiencia sensorial única, donde la precisión se encuentra con la elegancia.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">Atelier 42</div>
+            <div class="nav-links">
+                <a href="#creations">Creaciones</a>
+                <a href="#about">La Marca</a>
+                <a href="#gallery">Galería</a>
+                <a href="#contact" class="nav-cta">Reservar</a>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Abrir menú">
+                <span></span><span></span>
+            </button>
+        </div>
+    </nav>
 
-    <!-- Comentario de bienvenida -->
+    <header class="hero">
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1621303837174-89787a7d4729?auto=format&fit=crop&q=80" alt="Pastry making" class="hero-bg" />
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content fade-up-element">
+            <span class="eyebrow">Pastelería Boutique</span>
+            <h1 class="hero-title">El Arte<br>de lo Sublime</h1>
+            <p class="hero-subtitle">Una experiencia sensorial donde la precisión técnica se encuentra con la poesía visual.</p>
+            <a href="#creations" class="btn btn-primary">Descubrir Colección</a>
+        </div>
+    </header>
 
+    <section id="creations" class="section">
+        <div class="container fade-up-element">
+            <div class="section-header">
+                <h2>Nuestras Creaciones</h2>
+                <p>Obras maestras en miniatura, elaboradas diariamente con ingredientes extraordinarios.</p>
+            </div>
+            <div class="creations-grid">
+                <article class="creation-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1e4006a8a0?auto=format&fit=crop&q=80&w=600" alt="Croissant perfecto" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Viennoiserie</h3>
+                        <p>Capas de perfección dorada, elaboradas con mantequilla de Normandía y un proceso de laminado de 72 horas.</p>
+                    </div>
+                </article>
+                <article class="creation-card offset-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80&w=600" alt="Macarons" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Macarons de Autor</h3>
+                        <p>Joyas de almendra y ganache, equilibrando texturas etéreas y notas de sabor precisas e intensas.</p>
+                    </div>
+                </article>
+                <article class="creation-card">
+                    <div class="card-image">
+                        <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600" alt="Tarta Signature" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <h3>Alta Repostería</h3>
+                        <p>Entremets y tartas elaboradas bajo técnicas vanguardistas, desafiando la gravedad y los sentidos.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section bg-light">
+        <div class="container">
+            <div class="about-layout">
+                <div class="about-text fade-up-element">
+                    <span class="eyebrow">Nuestra Filosofía</span>
+                    <h2>Nacidos de la pasión por la excelencia</h2>
+                    <p>En Atelier 42, no hacemos pasteles; esculpimos emociones. Fundada bajo los principios de la estética minimalista y el respeto absoluto por el producto, nuestra boutique es un santuario para los paladares más exigentes.</p>
+                    <p>Cada pieza que abandona nuestro mostrador es el resultado de horas de perfeccionamiento, desde el temperado exacto del chocolate hasta el tostado preciso de las avellanas del Piamonte.</p>
+                </div>
+                <div class="about-image fade-up-element" style="transition-delay: 0.2s;">
+                    <img src="https://images.unsplash.com/photo-1582210874945-8c0861118749?auto=format&fit=crop&q=80&w=800" alt="Interior del atelier" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container fade-up-element">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <span class="feature-number">01</span>
+                    <h3>Precisión Absoluta</h3>
+                    <p>Cada gramo importa. Nuestra repostería está basada en el método científico, asegurando una constancia sublime en cada bocado.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-number">02</span>
+                    <h3>Origen Noble</h3>
+                    <p>Solo trabajamos con pequeños productores. Vainilla de Tahití, chocolate de origen único y lácteos artesanales.</p>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-number">03</span>
+                    <h3>Estética Refinada</h3>
+                    <p>Comemos con los ojos. Nuestras creaciones se despojan de lo excesivo para celebrar la belleza en su forma más pura.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="section no-padding-bottom">
+        <div class="container-fluid fade-up-element">
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&q=80&w=800" alt="Tartas" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1627998687784-db72be3f97da?auto=format&fit=crop&q=80&w=800" alt="Detalle pastelería" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=800" alt="Texturas" loading="lazy">
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1625937712144-7ca1b439e6a9?auto=format&fit=crop&q=80&w=800" alt="Elaboración" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section bg-dark">
+        <div class="container text-center fade-up-element">
+            <span class="eyebrow light-text">Contáctenos</span>
+            <h2 class="light-text">Háganos parte de su celebración</h2>
+            <p class="contact-subtitle">Aceptamos encargos personalizados y reservaciones para eventos privados. Permítanos diseñar algo inolvidable para usted.</p>
+            
+            <form class="inquiry-form" id="contactForm">
+                <div class="form-group">
+                    <input type="text" id="name" required placeholder=" ">
+                    <label for="name">Nombre Completo</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required placeholder=" ">
+                    <label for="email">Correo Electrónico</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" required placeholder=" " rows="4"></textarea>
+                    <label for="message">Detalles de su consulta</label>
+                </div>
+                <button type="submit" class="btn btn-primary btn-light">Enviar Consulta</button>
+            </form>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-layout">
+                <div class="footer-brand">
+                    <h2>Atelier 42</h2>
+                    <p>Elevando la pastelería contemporánea.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Visítenos</h4>
+                        <p>Avenida de la Luz 42<br>Distrito Financiero<br>Ciudad Metropolitana</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Horario</h4>
+                        <p>Mar - Sáb: 9:00 - 19:00<br>Dom: 10:00 - 16:00<br>Lunes: Cerrado</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Social</h4>
+                        <a href="#">Instagram</a>
+                        <a href="#">Pinterest</a>
+                        <a href="#">Journal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Atelier 42. Todos los derechos reservados.</p>
+                <div class="legal-links">
+                    <a href="#">Privacidad</a>
+                    <a href="#">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
