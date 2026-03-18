@@ -1,23 +1,51 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll effect
     const navbar = document.getElementById('navbar');
-    
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const heroBg = document.querySelector('.hero-bg');
+
+    if (heroBg) {
+        if (heroBg.complete) {
+            heroBg.classList.add('loaded');
+        } else {
+            heroBg.addEventListener('load', () => heroBg.classList.add('loaded'));
+        }
+    }
+
+    let lastScroll = 0;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
+        const y = window.scrollY;
+        if (y > 50) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
-    });
+        lastScroll = y;
+    }, { passive: true });
 
-    // Intersection Observer for fade-up animations
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
     const observerOptions = {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.15
+        rootMargin: '0px 0px -60px 0px',
+        threshold: 0.1
     };
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
@@ -26,48 +54,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    const animatedElements = document.querySelectorAll('.fade-up-element');
-    animatedElements.forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up-element').forEach(el => observer.observe(el));
 
-    // Form submission handling (prevent default for demo)
-    const form = document.getElementById('contactForm');
-    if(form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = form.querySelector('button');
-            const originalText = btn.textContent;
-            btn.textContent = 'Enviando...';
-            
-            // Simulate network request
-            setTimeout(() => {
-                btn.textContent = '¡Mensaje Enviado!';
-                form.reset();
-                
-                setTimeout(() => {
-                    btn.textContent = originalText;
-                }, 3000);
-            }, 1000);
-        });
-    }
-
-    // Smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
-            
-            const targetElement = document.querySelector(targetId);
-            if (targetElement) {
-                // Adjust scroll position considering fixed navbar
+            const target = document.querySelector(targetId);
+            if (target) {
                 const navHeight = navbar.offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                const pos = target.getBoundingClientRect().top + window.scrollY - navHeight;
+                window.scrollTo({ top: pos, behavior: 'smooth' });
             }
         });
     });
+
+    const form = document.getElementById('contactForm');
+    if (form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = form.querySelector('button');
+            const btnText = btn.querySelector('.btn-text');
+            const original = btnText.textContent;
+            btnText.textContent = 'Enviando...';
+            btn.disabled = true;
+            btn.style.opacity = '0.7';
+
+            setTimeout(() => {
+                btnText.textContent = '¡Mensaje Enviado!';
+                form.reset();
+                setTimeout(() => {
+                    btnText.textContent = original;
+                    btn.disabled = false;
+                    btn.style.opacity = '';
+                }, 3000);
+            }, 1200);
+        });
+    }
+
+    const marqueeTrack = document.querySelector('.marquee-track');
+    if (marqueeTrack) {
+        const content = marqueeTrack.innerHTML;
+        marqueeTrack.innerHTML = content + content;
+    }
 });
