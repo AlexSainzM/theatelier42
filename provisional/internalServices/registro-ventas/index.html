@@ -60,6 +60,11 @@
     .required-star {
       color: #dc3545;
     }
+
+    .qty-stepper-wrap .qty-display {
+      min-width: 2.75rem;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -108,22 +113,21 @@
           <!-- ===================================================== -->
           <section class="mb-4">
             <label for="casaDirigida" class="form-label fw-semibold">
-              2. ¿A qué casa va dirigida? <span class="required-star">*</span>
+              2. ¿A qué casa o a quién va dirigida? <span class="required-star">*</span>
             </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control text-uppercase"
               id="casaDirigida"
               name="A que casa va dirigida"
-              maxlength="5"
               placeholder="Ej. A12, C5, B204"
               required
             />
             <div class="form-text">
-              Máximo 5 caracteres. Solo letras y números.
+              Campo de texto libre. Lo que escribas se guardará en mayúsculas.
             </div>
             <div class="invalid-feedback">
-              Captura un valor válido de máximo 5 caracteres, usando solo letras y números.
+              Indica a qué casa o a quién va dirigido el pedido.
             </div>
           </section>
 
@@ -267,24 +271,57 @@
 
           <div class="col-6 col-md-3">
             <label for="${qtyId}" class="form-label mb-1">Cantidad</label>
-            <input
-              type="number"
-              min="0"
-              step="1"
-              value="0"
-              id="${qtyId}"
-              class="form-control product-qty"
-              data-type="${type}"
-              data-product-id="${producto.id}"
-              data-product-name="${producto.nombre}"
-              data-product-price="${producto.precio}"
-              ${type === "regalo" ? '' : `name="Cantidad producto ${producto.nombre}"`}
-            />
+            <div class="qty-stepper-wrap">
+              <input
+                type="hidden"
+                value="0"
+                id="${qtyId}"
+                class="product-qty"
+                data-type="${type}"
+                data-product-id="${producto.id}"
+                data-product-name="${producto.nombre}"
+                data-product-price="${producto.precio}"
+                ${type === "regalo" ? '' : `name="Cantidad producto ${producto.nombre}"`}
+              />
+              <div class="input-group">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary qty-btn qty-minus"
+                  data-type="${type}"
+                  data-product-id="${producto.id}"
+                  aria-label="Disminuir cantidad"
+                >
+                  −
+                </button>
+                <span
+                  class="input-group-text flex-grow-1 justify-content-center qty-display fw-semibold"
+                  id="${qtyId}_display"
+                  aria-live="polite"
+                >0</span>
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary qty-btn qty-plus"
+                  data-type="${type}"
+                  data-product-id="${producto.id}"
+                  aria-label="Aumentar cantidad"
+                >
+                  +
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       `;
 
       return row;
+    }
+
+    function setProductQuantity(qtyInput, newValue) {
+      let v = Math.max(0, parseInt(newValue, 10) || 0);
+      qtyInput.value = String(v);
+      const wrap = qtyInput.closest(".qty-stepper-wrap");
+      const display = wrap && wrap.querySelector(".qty-display");
+      if (display) display.textContent = v;
     }
 
     function renderProducts() {
@@ -310,32 +347,32 @@
           );
 
           if (checkbox.checked && Number(qtyInput.value) === 0) {
-            qtyInput.value = 1;
+            setProductQuantity(qtyInput, 1);
           }
 
           if (!checkbox.checked) {
-            qtyInput.value = 0;
+            setProductQuantity(qtyInput, 0);
           }
 
           updateSummary();
         });
       });
 
-      document.querySelectorAll(".product-qty").forEach((qtyInput) => {
-        qtyInput.addEventListener("input", () => {
-          let value = parseInt(qtyInput.value, 10);
+      document.querySelectorAll(".qty-minus, .qty-plus").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const type = btn.dataset.type;
+          const productId = btn.dataset.productId;
+          const qtyInput = document.querySelector(
+            `.product-qty[data-type="${type}"][data-product-id="${productId}"]`
+          );
+          const delta = btn.classList.contains("qty-plus") ? 1 : -1;
+          const current = parseInt(qtyInput.value, 10) || 0;
+          setProductQuantity(qtyInput, current + delta);
 
-          if (isNaN(value) || value < 0) {
-            qtyInput.value = 0;
-            value = 0;
-          }
-
-          const type = qtyInput.dataset.type;
-          const productId = qtyInput.dataset.productId;
+          const value = parseInt(qtyInput.value, 10) || 0;
           const checkbox = document.querySelector(
             `.product-check[data-type="${type}"][data-product-id="${productId}"]`
           );
-
           checkbox.checked = value > 0;
           updateSummary();
         });
@@ -416,9 +453,8 @@
 
     function validateCasaDirigida() {
       const value = casaDirigidaInput.value.trim();
-      const regex = /^[a-zA-Z0-9]{1,5}$/;
 
-      if (!regex.test(value)) {
+      if (value.length === 0) {
         casaDirigidaInput.classList.add("is-invalid");
         return false;
       }
@@ -437,9 +473,21 @@
     }
 
     casaDirigidaInput.addEventListener("input", () => {
-      const cleaned = casaDirigidaInput.value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 5);
-      casaDirigidaInput.value = cleaned;
-      if (cleaned.length > 0) validateCasaDirigida();
+      const el = casaDirigidaInput;
+      const start = el.selectionStart;
+      const end = el.selectionEnd;
+      const upper = el.value.toUpperCase();
+      if (el.value !== upper) {
+        el.value = upper;
+        if (start !== null && end !== null) {
+          el.setSelectionRange(start, end);
+        }
+      }
+      if (el.value.trim().length > 0) {
+        validateCasaDirigida();
+      } else {
+        el.classList.remove("is-valid", "is-invalid");
+      }
     });
 
     llevaRegaloCheckbox.addEventListener("change", () => {
@@ -447,7 +495,7 @@
 
       if (!llevaRegaloCheckbox.checked) {
         document.querySelectorAll('.product-qty[data-type="regalo"]').forEach((input) => {
-          input.value = 0;
+          setProductQuantity(input, 0);
         });
         document.querySelectorAll('.product-check[data-type="regalo"]').forEach((check) => {
           check.checked = false;
