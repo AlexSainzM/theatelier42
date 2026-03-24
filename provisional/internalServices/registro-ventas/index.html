@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registro de Ventas</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      background: #f7f7f7;
+    }
+
+    .form-card {
+      max-width: 950px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      overflow: hidden;
+    }
+
+    .form-header {
+      background: #212529;
+      color: #fff;
+      padding: 24px;
+    }
+
+    .product-row,
+    .gift-row {
+      border: 1px solid #e9ecef;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+      background: #fcfcfc;
+    }
+
+    .section-title {
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .summary-box {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .price-badge {
+      font-size: 0.9rem;
+    }
+
+    .required-star {
+      color: #dc3545;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-card">
+      <div class="form-header">
+        <h1 class="h3 mb-1">Registro de Ventas</h1>
+        <p class="mb-0">Formulario sencillo para registrar pedidos y calcular el total estimado.</p>
+      </div>
+
+      <div class="p-4 p-md-5">
+        <form
+          id="salesForm"
+          action="TU_ENDPOINT_DE_FORMSPREE"
+          method="POST"
+          novalidate
+        >
+          <!-- ===================================================== -->
+          <!-- CONFIGURACION OCULTA PARA FORMSPREE -->
+          <!-- ===================================================== -->
+          <input type="hidden" name="_subject" value="Nuevo registro de venta" />
+          <input type="hidden" name="Resumen de productos solicitados" id="productosSolicitadosResumen" />
+          <input type="hidden" name="Resumen de productos regalados" id="productosRegaladosResumen" />
+          <input type="hidden" name="Total estimado" id="totalEstimadoInput" />
+          <input type="hidden" name="Lleva regalo (respuesta)" id="llevaRegaloRespuesta" />
+
+          <!-- ===================================================== -->
+          <!-- 1. PRODUCTOS SOLICITADOS -->
+          <!-- ===================================================== -->
+          <section class="mb-4">
+            <h2 class="h5 section-title">
+              1. Productos solicitados <span class="required-star">*</span>
+            </h2>
+            <p class="text-muted mb-3">
+              Selecciona uno o varios productos y captura la cantidad correspondiente.
+            </p>
+
+            <div id="productsContainer"></div>
+            <div class="invalid-feedback d-block hidden" id="productsError">
+              Debes seleccionar al menos un producto con cantidad mayor a 0.
+            </div>
+          </section>
+
+          <!-- ===================================================== -->
+          <!-- 2. A QUE CASA VA DIRIGIDA -->
+          <!-- ===================================================== -->
+          <section class="mb-4">
+            <label for="casaDirigida" class="form-label fw-semibold">
+              2. ¿A qué casa va dirigida? <span class="required-star">*</span>
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="casaDirigida"
+              name="A que casa va dirigida"
+              maxlength="5"
+              placeholder="Ej. A12, C5, B204"
+              required
+            />
+            <div class="form-text">
+              Máximo 5 caracteres. Solo letras y números.
+            </div>
+            <div class="invalid-feedback">
+              Captura un valor válido de máximo 5 caracteres, usando solo letras y números.
+            </div>
+          </section>
+
+          <!-- ===================================================== -->
+          <!-- 3. COMENTARIOS GENERALES -->
+          <!-- ===================================================== -->
+          <section class="mb-4">
+            <label for="comentariosGenerales" class="form-label fw-semibold">
+              3. Comentarios generales
+            </label>
+            <textarea
+              class="form-control"
+              id="comentariosGenerales"
+              name="Comentarios generales"
+              rows="4"
+              placeholder="Escribe aquí cualquier comentario adicional..."
+            ></textarea>
+          </section>
+
+          <!-- ===================================================== -->
+          <!-- 4. LLEVA REGALO -->
+          <!-- ===================================================== -->
+          <section class="mb-4">
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="llevaRegalo"
+                name="Lleva regalo"
+              />
+              <label class="form-check-label fw-semibold" for="llevaRegalo">
+                4. Lleva regalo
+              </label>
+            </div>
+
+            <div id="giftSection" class="hidden">
+              <div class="mb-2 text-muted">
+                Selecciona los productos que se regalaron y su cantidad.
+              </div>
+              <div id="giftProductsContainer"></div>
+            </div>
+          </section>
+
+          <!-- ===================================================== -->
+          <!-- RESUMEN -->
+          <!-- ===================================================== -->
+          <section class="mb-4">
+            <h2 class="h5 section-title">Resumen</h2>
+            <div class="summary-box">
+              <p class="mb-2"><strong>Productos seleccionados:</strong></p>
+              <div id="selectedProductsPreview" class="mb-3 text-muted">
+                Aún no has seleccionado productos.
+              </div>
+
+              <p class="mb-2"><strong>Productos regalados:</strong></p>
+              <div id="giftProductsPreview" class="mb-3 text-muted">
+                No aplica.
+              </div>
+
+              <hr />
+
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="fw-semibold">Total estimado:</span>
+                <span class="fs-4 fw-bold" id="totalDisplay">$0.00</span>
+              </div>
+              <div class="form-text mt-2">
+                El total estimado contempla únicamente los productos solicitados, no los regalados.
+              </div>
+            </div>
+          </section>
+
+          <div class="d-grid d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-dark px-4">
+              Enviar registro
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /*
+      ============================================================
+      CONFIGURACION EDITABLE DE PRODUCTOS
+      - Aqui puedes cambiar nombres y precios
+      ============================================================
+    */
+    const PRODUCTOS = [
+      { id: "flan", nombre: "Flan", precio: 25 },
+      { id: "tarte_normad", nombre: "Tarte Normad", precio: 40 },
+      { id: "rol_canela_simple", nombre: "Rol de Canela Simple", precio: 35 },
+      { id: "rol_canela_3_leches", nombre: "Rol de Canela 3 leches", precio: 50 },
+      { id: "rol_canela_cobertura_quesoc", nombre: "Rol de Canela C/CoberturaQuesoC", precio: 50 }
+    ];
+
+    const productsContainer = document.getElementById("productsContainer");
+    const giftProductsContainer = document.getElementById("giftProductsContainer");
+    const llevaRegaloCheckbox = document.getElementById("llevaRegalo");
+    const giftSection = document.getElementById("giftSection");
+    const totalDisplay = document.getElementById("totalDisplay");
+    const selectedProductsPreview = document.getElementById("selectedProductsPreview");
+    const giftProductsPreview = document.getElementById("giftProductsPreview");
+    const totalEstimadoInput = document.getElementById("totalEstimadoInput");
+    const productosSolicitadosResumen = document.getElementById("productosSolicitadosResumen");
+    const productosRegaladosResumen = document.getElementById("productosRegaladosResumen");
+    const llevaRegaloRespuesta = document.getElementById("llevaRegaloRespuesta");
+    const salesForm = document.getElementById("salesForm");
+    const casaDirigidaInput = document.getElementById("casaDirigida");
+    const productsError = document.getElementById("productsError");
+
+    function createProductRow(producto, type = "venta") {
+      const row = document.createElement("div");
+      row.className = type === "venta" ? "product-row" : "gift-row";
+
+      const checkId = `${type}_${producto.id}_check`;
+      const qtyId = `${type}_${producto.id}_qty`;
+
+      row.innerHTML = `
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-md-6">
+            <div class="form-check">
+              <input
+                class="form-check-input product-check"
+                type="checkbox"
+                id="${checkId}"
+                data-type="${type}"
+                data-product-id="${producto.id}"
+                data-product-name="${producto.nombre}"
+                data-product-price="${producto.precio}"
+              />
+              <label class="form-check-label fw-semibold" for="${checkId}">
+                ${producto.nombre}
+              </label>
+            </div>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <span class="badge text-bg-secondary price-badge">$${producto.precio}</span>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <label for="${qtyId}" class="form-label mb-1">Cantidad</label>
+            <input
+              type="number"
+              min="0"
+              step="1"
+              value="0"
+              id="${qtyId}"
+              class="form-control product-qty"
+              data-type="${type}"
+              data-product-id="${producto.id}"
+              data-product-name="${producto.nombre}"
+              data-product-price="${producto.precio}"
+              ${type === "regalo" ? '' : `name="Cantidad producto ${producto.nombre}"`}
+            />
+          </div>
+        </div>
+      `;
+
+      return row;
+    }
+
+    function renderProducts() {
+      productsContainer.innerHTML = "";
+      giftProductsContainer.innerHTML = "";
+
+      PRODUCTOS.forEach((producto) => {
+        productsContainer.appendChild(createProductRow(producto, "venta"));
+        giftProductsContainer.appendChild(createProductRow(producto, "regalo"));
+      });
+
+      attachEvents();
+      updateSummary();
+    }
+
+    function attachEvents() {
+      document.querySelectorAll(".product-check").forEach((checkbox) => {
+        checkbox.addEventListener("change", () => {
+          const type = checkbox.dataset.type;
+          const productId = checkbox.dataset.productId;
+          const qtyInput = document.querySelector(
+            `.product-qty[data-type="${type}"][data-product-id="${productId}"]`
+          );
+
+          if (checkbox.checked && Number(qtyInput.value) === 0) {
+            qtyInput.value = 1;
+          }
+
+          if (!checkbox.checked) {
+            qtyInput.value = 0;
+          }
+
+          updateSummary();
+        });
+      });
+
+      document.querySelectorAll(".product-qty").forEach((qtyInput) => {
+        qtyInput.addEventListener("input", () => {
+          let value = parseInt(qtyInput.value, 10);
+
+          if (isNaN(value) || value < 0) {
+            qtyInput.value = 0;
+            value = 0;
+          }
+
+          const type = qtyInput.dataset.type;
+          const productId = qtyInput.dataset.productId;
+          const checkbox = document.querySelector(
+            `.product-check[data-type="${type}"][data-product-id="${productId}"]`
+          );
+
+          checkbox.checked = value > 0;
+          updateSummary();
+        });
+      });
+    }
+
+    function getSelectedProducts(type = "venta") {
+      const items = [];
+
+      document.querySelectorAll(`.product-qty[data-type="${type}"]`).forEach((input) => {
+        const cantidad = parseInt(input.value, 10) || 0;
+
+        if (cantidad > 0) {
+          items.push({
+            id: input.dataset.productId,
+            nombre: input.dataset.productName,
+            precio: parseFloat(input.dataset.productPrice),
+            cantidad: cantidad,
+            subtotal: parseFloat(input.dataset.productPrice) * cantidad
+          });
+        }
+      });
+
+      return items;
+    }
+
+    function updateSummary() {
+      const ventas = getSelectedProducts("venta");
+      const regalos = llevaRegaloCheckbox.checked ? getSelectedProducts("regalo") : [];
+
+      const total = ventas.reduce((acc, item) => acc + item.subtotal, 0);
+
+      if (ventas.length > 0) {
+        selectedProductsPreview.innerHTML = ventas
+          .map(
+            (item) =>
+              `<div>• ${item.nombre} — Cantidad: ${item.cantidad} — Subtotal: $${item.subtotal.toFixed(2)}</div>`
+          )
+          .join("");
+      } else {
+        selectedProductsPreview.innerHTML = `<span class="text-muted">Aún no has seleccionado productos.</span>`;
+      }
+
+      if (llevaRegaloCheckbox.checked) {
+        if (regalos.length > 0) {
+          giftProductsPreview.innerHTML = regalos
+            .map((item) => `<div>• ${item.nombre} — Cantidad: ${item.cantidad}</div>`)
+            .join("");
+        } else {
+          giftProductsPreview.innerHTML = `<span class="text-muted">Se marcó regalo, pero aún no se han seleccionado productos regalados.</span>`;
+        }
+      } else {
+        giftProductsPreview.innerHTML = `<span class="text-muted">No aplica.</span>`;
+      }
+
+      totalDisplay.textContent = `$${total.toFixed(2)}`;
+      totalEstimadoInput.value = total.toFixed(2);
+
+      productosSolicitadosResumen.value =
+        ventas.length > 0
+          ? ventas
+              .map(
+                (item) =>
+                  `${item.nombre} | Cantidad: ${item.cantidad} | Precio unitario: $${item.precio} | Subtotal: $${item.subtotal.toFixed(2)}`
+              )
+              .join(" ; ")
+          : "Sin productos seleccionados";
+
+      productosRegaladosResumen.value =
+        regalos.length > 0
+          ? regalos
+              .map((item) => `${item.nombre} | Cantidad: ${item.cantidad}`)
+              .join(" ; ")
+          : "Sin productos regalados";
+
+      llevaRegaloRespuesta.value = llevaRegaloCheckbox.checked ? "Sí" : "No";
+    }
+
+    function validateCasaDirigida() {
+      const value = casaDirigidaInput.value.trim();
+      const regex = /^[a-zA-Z0-9]{1,5}$/;
+
+      if (!regex.test(value)) {
+        casaDirigidaInput.classList.add("is-invalid");
+        return false;
+      }
+
+      casaDirigidaInput.classList.remove("is-invalid");
+      casaDirigidaInput.classList.add("is-valid");
+      return true;
+    }
+
+    function validateProducts() {
+      const ventas = getSelectedProducts("venta");
+      const isValid = ventas.length > 0;
+
+      productsError.classList.toggle("hidden", isValid);
+      return isValid;
+    }
+
+    casaDirigidaInput.addEventListener("input", () => {
+      const cleaned = casaDirigidaInput.value.replace(/[^a-zA-Z0-9]/g, "").slice(0, 5);
+      casaDirigidaInput.value = cleaned;
+      if (cleaned.length > 0) validateCasaDirigida();
+    });
+
+    llevaRegaloCheckbox.addEventListener("change", () => {
+      giftSection.classList.toggle("hidden", !llevaRegaloCheckbox.checked);
+
+      if (!llevaRegaloCheckbox.checked) {
+        document.querySelectorAll('.product-qty[data-type="regalo"]').forEach((input) => {
+          input.value = 0;
+        });
+        document.querySelectorAll('.product-check[data-type="regalo"]').forEach((check) => {
+          check.checked = false;
+        });
+      }
+
+      updateSummary();
+    });
+
+    salesForm.addEventListener("submit", (e) => {
+      const isCasaValid = validateCasaDirigida();
+      const areProductsValid = validateProducts();
+
+      updateSummary();
+
+      if (!isCasaValid || !areProductsValid) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    });
+
+    renderProducts();
+  </script>
+</body>
+</html>
