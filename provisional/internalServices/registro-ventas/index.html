@@ -85,11 +85,8 @@
           <!-- ===================================================== -->
           <!-- CONFIGURACION OCULTA PARA FORMSPREE -->
           <!-- ===================================================== -->
-          <input type="hidden" name="asunto" value="Nuevo registro de venta" />
-          <input type="hidden" name="Resumen de productos solicitados" id="productosSolicitadosResumen" />
-          <input type="hidden" name="Resumen de productos regalados" id="productosRegaladosResumen" />
           <input type="hidden" name="Total estimado" id="totalEstimadoInput" />
-          <input type="hidden" name="Lleva regalo (respuesta)" id="llevaRegaloRespuesta" />
+
 
           <!-- ===================================================== -->
           <!-- 1. PRODUCTOS SOLICITADOS -->
@@ -109,25 +106,47 @@
           </section>
 
           <!-- ===================================================== -->
-          <!-- 2. A QUE CASA VA DIRIGIDA -->
+          <!-- 2. VENTA EN Q.P. Y CASA DIRIGIDA -->
           <!-- ===================================================== -->
           <section class="mb-4">
-            <label for="casaDirigida" class="form-label fw-semibold">
-              2. ¿A qué casa o a quién va dirigida? <span class="required-star">*</span>
-            </label>
-            <input
-              type="text"
-              class="form-control text-uppercase"
-              id="casaDirigida"
-              name="A que casa va dirigida"
-              placeholder="Ej. A12, C5, B204"
-              required
-            />
-            <div class="form-text">
-              Campo de texto libre. Lo que escribas se guardará en mayúsculas.
+            <h2 class="h5 section-title mb-3">2. Destino (Q.P.)</h2>
+
+            <div class="form-check mb-3">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="ventaEnQP"
+                name="Venta en Q.P."
+                value="Sí"
+                aria-controls="casaDirigidaWrap"
+                aria-expanded="false"
+              />
+              <label class="form-check-label fw-semibold" for="ventaEnQP">
+                Venta en Q.P.?
+              </label>
             </div>
-            <div class="invalid-feedback">
-              Indica a qué casa o a quién va dirigido el pedido.
+
+            <div id="casaDirigidaWrap" class="hidden">
+              <label for="casaDirigida" class="form-label fw-semibold">
+                ¿A qué casa va dirigida? <span class="required-star">*</span>
+              </label>
+              <input
+                type="text"
+                class="form-control text-uppercase"
+                id="casaDirigida"
+                name="A que casa va dirigida"
+                maxlength="3"
+                inputmode="text"
+                autocomplete="off"
+                placeholder="Ej. A12"
+                disabled
+              />
+              <div class="form-text">
+                Hasta 3 caracteres alfanuméricos. Se convierten a mayúsculas automáticamente.
+              </div>
+              <div class="invalid-feedback" id="casaDirigidaFeedback">
+                Ingresa un código de 1 a 3 letras o números (sin espacios ni símbolos).
+              </div>
             </div>
           </section>
 
@@ -232,12 +251,13 @@
     const selectedProductsPreview = document.getElementById("selectedProductsPreview");
     const giftProductsPreview = document.getElementById("giftProductsPreview");
     const totalEstimadoInput = document.getElementById("totalEstimadoInput");
-    const productosSolicitadosResumen = document.getElementById("productosSolicitadosResumen");
-    const productosRegaladosResumen = document.getElementById("productosRegaladosResumen");
-    const llevaRegaloRespuesta = document.getElementById("llevaRegaloRespuesta");
     const salesForm = document.getElementById("salesForm");
+    const ventaEnQPCheckbox = document.getElementById("ventaEnQP");
+    const casaDirigidaWrap = document.getElementById("casaDirigidaWrap");
     const casaDirigidaInput = document.getElementById("casaDirigida");
     const productsError = document.getElementById("productsError");
+
+    const CASA_QP_REGEX = /^[A-Z0-9]{1,3}$/;
 
     function createProductRow(producto, type = "venta") {
       const row = document.createElement("div");
@@ -281,7 +301,7 @@
                 data-product-id="${producto.id}"
                 data-product-name="${producto.nombre}"
                 data-product-price="${producto.precio}"
-                ${type === "regalo" ? '' : `name="Cantidad producto ${producto.nombre}"`}
+                ${type === "regalo" ? '' : `name="Cant. ${producto.nombre}"`}
               />
               <div class="input-group">
                 <button
@@ -430,32 +450,38 @@
 
       totalDisplay.textContent = `$${total.toFixed(2)}`;
       totalEstimadoInput.value = total.toFixed(2);
+    }
 
-      productosSolicitadosResumen.value =
-        ventas.length > 0
-          ? ventas
-              .map(
-                (item) =>
-                  `${item.nombre} | Cantidad: ${item.cantidad} | Precio unitario: $${item.precio} | Subtotal: $${item.subtotal.toFixed(2)}`
-              )
-              .join(" ; ")
-          : "Sin productos seleccionados";
+    function setCasaQPSectionOpen(open) {
+      casaDirigidaWrap.classList.toggle("hidden", !open);
+      ventaEnQPCheckbox.setAttribute("aria-expanded", open ? "true" : "false");
+      casaDirigidaInput.disabled = !open;
+      if (!open) {
+        casaDirigidaInput.value = "";
+        casaDirigidaInput.classList.remove("is-valid", "is-invalid");
+        casaDirigidaInput.removeAttribute("required");
+        casaDirigidaInput.setAttribute("aria-required", "false");
+      } else {
+        casaDirigidaInput.setAttribute("required", "");
+        casaDirigidaInput.setAttribute("aria-required", "true");
+      }
+    }
 
-      productosRegaladosResumen.value =
-        regalos.length > 0
-          ? regalos
-              .map((item) => `${item.nombre} | Cantidad: ${item.cantidad}`)
-              .join(" ; ")
-          : "Sin productos regalados";
-
-      llevaRegaloRespuesta.value = llevaRegaloCheckbox.checked ? "Sí" : "No";
+    function sanitizeCasaQP(raw) {
+      return raw.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 3);
     }
 
     function validateCasaDirigida() {
-      const value = casaDirigidaInput.value.trim();
+      if (!ventaEnQPCheckbox.checked) {
+        casaDirigidaInput.classList.remove("is-invalid", "is-valid");
+        return true;
+      }
 
-      if (value.length === 0) {
+      const value = sanitizeCasaQP(casaDirigidaInput.value);
+
+      if (value.length === 0 || !CASA_QP_REGEX.test(value)) {
         casaDirigidaInput.classList.add("is-invalid");
+        casaDirigidaInput.classList.remove("is-valid");
         return false;
       }
 
@@ -472,18 +498,28 @@
       return isValid;
     }
 
+    ventaEnQPCheckbox.addEventListener("change", () => {
+      setCasaQPSectionOpen(ventaEnQPCheckbox.checked);
+      if (ventaEnQPCheckbox.checked) {
+        casaDirigidaInput.focus();
+      }
+    });
+
     casaDirigidaInput.addEventListener("input", () => {
       const el = casaDirigidaInput;
+      if (el.disabled) return;
       const start = el.selectionStart;
       const end = el.selectionEnd;
-      const upper = el.value.toUpperCase();
-      if (el.value !== upper) {
-        el.value = upper;
+      const cleaned = sanitizeCasaQP(el.value);
+      if (el.value !== cleaned) {
+        el.value = cleaned;
+        const len = cleaned.length;
         if (start !== null && end !== null) {
-          el.setSelectionRange(start, end);
+          const pos = Math.min(len, start, end);
+          el.setSelectionRange(pos, pos);
         }
       }
-      if (el.value.trim().length > 0) {
+      if (el.value.length > 0) {
         validateCasaDirigida();
       } else {
         el.classList.remove("is-valid", "is-invalid");
@@ -516,6 +552,8 @@
         e.stopPropagation();
       }
     });
+
+    setCasaQPSectionOpen(false);
 
     renderProducts();
   </script>
