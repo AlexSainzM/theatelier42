@@ -146,11 +146,38 @@ em {
     letter-spacing: 0.02em;
     color: var(--white);
     transition: color var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+    flex-shrink: 0;
 }
 
 .nav-brand span {
     font-weight: 300;
     opacity: 0.7;
+}
+
+.nav-brand .logo-placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 1;
+    font-weight: inherit;
+    max-height: clamp(1.5rem, 3.2vw, 2rem);
+}
+
+.nav-brand .logo-img {
+    max-height: clamp(1.5rem, 3.2vw, 2rem);
+    width: auto;
+    max-width: min(11rem, 42vw);
+    height: auto;
+    object-fit: contain;
+    object-position: left center;
+}
+
+.navbar.scrolled .nav-brand .logo-placeholder,
+.navbar.scrolled .nav-brand .logo-img {
+    max-height: clamp(1.35rem, 2.8vw, 1.75rem);
 }
 
 .navbar.scrolled .nav-brand {
