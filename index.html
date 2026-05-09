@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atelier 42 | Alta Repostería</title>
-    <meta name="description" content="El arte de la pastelería. Una experiencia sensorial única, donde la precisión se encuentra con la elegancia.">
+    <title>Atelier 42 | Repostería boutique · Puebla</title>
+    <meta name="description" content="Postres artesanales de autor para celebraciones, eventos y pedidos especiales en Puebla. Repostería boutique bajo pedido con presentación personalizada.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
@@ -13,19 +13,23 @@
 </head>
 <body>
 
+    <!-- TODO: Reemplazar wa.me/5210000000000 con número real de WhatsApp en todos los enlaces data-whatsapp -->
+
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#" class="nav-brand mx-3">
+            <a href="#hero" class="nav-brand mx-3">
                 <span class="logo-placeholder">
                     <img src="./assets/img/common/atelier_logo_with_babkee.webp" alt="Atelier 42 Logo" class="logo-img">
                 </span>
             </a>
             <div class="nav-links" id="navLinks">
-                <a href="#creations">Creaciones</a>
-                <a href="#distinction">Distinción</a>
+                <a href="#hero">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#celebraciones">Celebraciones</a>
+                <a href="#creaciones">Creaciones</a>
                 <a href="#about">Filosofía</a>
-                <a href="#gallery">Galería</a>
-                <a href="#contact" class="nav-cta">Reservar</a>
+                <a href="#contact">Contacto</a>
+                <a href="#contact" class="nav-cta">Cotizar pedido</a>
             </div>
             <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Abrir menú">
                 <span></span><span></span><span></span>
@@ -40,13 +44,13 @@
         </div>
         <div class="hero-content">
             <div class="hero-inner fade-up-element">
-                <span class="eyebrow">Repostería de autor · Est. 2012</span>
-                <h1 class="hero-title">Técnica impecable,<br>sabor<em> Honesto</em></h1>
+                <span class="eyebrow">Repostería boutique · Puebla</span>
+                <h1 class="hero-title">Postres de autor para celebrar con intención</h1>
                 <div class="hero-divider"></div>
-                <p class="hero-subtitle">Desde nuestro taller en Puebla, creamos piezas de panadería y alta repostería que celebran el proceso artesanal.</p>
+                <p class="hero-subtitle">Creamos piezas artesanales y postres individuales para celebraciones, eventos y pedidos especiales, cuidando cada detalle desde el sabor hasta la presentación.</p>
                 <div class="hero-actions">
-                    <a href="#creations" class="btn-atelier btn-atelier-primary">Explorar creaciones</a>
-                    <a href="#about" class="btn-atelier btn-atelier-ghost">Haz tu pedido</a>
+                    <a href="#servicios" class="btn-atelier btn-atelier-primary">Ver servicios</a>
+                    <a href="https://wa.me/5210000000000?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido%20para%20celebraci%C3%B3n%20con%20Atelier%2042." class="btn-atelier btn-atelier-ghost" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
                 </div>
             </div>
         </div>
@@ -56,235 +60,354 @@
         </div>
     </header>
 
-    <section class="marquee-strip">
+    <section class="marquee-strip" aria-hidden="true">
         <div class="marquee-track">
-            <span>Babka  ·  Datíl D'Atelier  ·  Carrot Cake  ·  Roles de Canela  ·  Banana Panqué  ·  Tarte Normand  ·  Raspberry Chessecake Sticks  ·  Mango Chessecake  ·  Flan  · </span>
+            <span>Babka  ·  Datíl D'Atelier  ·  Carrot Cake  ·  Roles de Canela  ·  Banana Panqué  ·  Tarte Normand  ·  Raspberry Cheesecake Sticks  ·  Mango Cheesecake  ·  Flan  ·  </span>
         </div>
     </section>
 
-    <section id="creations" class="section section-creations">
+    <!-- Servicios Atelier 42 -->
+    <section id="servicios" class="section section-services">
         <div class="container">
             <div class="section-header fade-up-element">
-                <span class="eyebrow">La Colección</span>
-                <h2>Nuestras Creaciones</h2>
-                <p class="section-lead">En Atelier 42, el ingrediente principal es el rigor. Seleccionamos cada elemento —desde las rosas comestibles hasta el cacao más fino— para asegurar que lo rústico de nuestra presentación esconda una complejidad técnica que sorprenda al paladar.</p>
+                <span class="eyebrow">Qué hacemos</span>
+                <h2>Servicios Atelier 42</h2>
+                <p class="section-lead">Desde una pieza especial para compartir hasta postres individuales para evento, cada pedido se prepara bajo solicitud y con atención al detalle.</p>
+            </div>
+            <div class="services-grid">
+                <article class="service-card fade-up-element">
+                    <h3>Celebraciones Atelier</h3>
+                    <p>Postres individuales para cumpleaños, bautizos, reuniones y eventos especiales, con opciones de presentación esencial o premium.</p>
+                    <div class="service-card-actions">
+                        <a href="#celebraciones" class="btn-atelier btn-atelier-outline btn-atelier-sm">Cotizar celebración</a>
+                        <a href="https://wa.me/5210000000000?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido%20para%20celebraci%C3%B3n%20con%20Atelier%2042." class="link-whatsapp" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                    </div>
+                </article>
+                <article class="service-card fade-up-element" style="transition-delay:0.08s">
+                    <h3>Piezas para Compartir</h3>
+                    <p>Pasteles, panqués y piezas completas elaboradas bajo pedido para disfrutar en reuniones, comidas familiares o momentos especiales.</p>
+                    <div class="service-card-actions">
+                        <a href="#creaciones" class="btn-atelier btn-atelier-outline btn-atelier-sm">Ver creaciones</a>
+                    </div>
+                </article>
+                <article class="service-card fade-up-element" style="transition-delay:0.16s">
+                    <h3>Detalles Corporativos</h3>
+                    <p>Postres personalizados para empresas, clientes y colaboradores, con opción de etiqueta, empaque especial y pedidos por volumen.</p>
+                    <div class="service-card-actions">
+                        <a href="#contact" class="btn-atelier btn-atelier-outline btn-atelier-sm">Solicitar cotización</a>
+                    </div>
+                </article>
+                <article class="service-card fade-up-element" style="transition-delay:0.24s">
+                    <h3>Ediciones Especiales</h3>
+                    <p>Colecciones limitadas por temporada disponibles bajo preventa para fechas especiales.</p>
+                    <div class="service-card-actions">
+                        <a href="#contact" class="btn-atelier btn-atelier-outline btn-atelier-sm">Consultar disponibilidad</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Celebraciones Atelier -->
+    <section id="celebraciones" class="section section-celebraciones">
+        <div class="container">
+            <div class="celebraciones-intro fade-up-element">
+                <span class="eyebrow">Servicio principal</span>
+                <h2>Celebraciones Atelier</h2>
+                <p class="section-lead section-lead-left">Postres individuales preparados bajo pedido para acompañar momentos importantes.</p>
+                <p class="celebraciones-body">Ya sea para un cumpleaños, bautizo, reunión familiar o evento corporativo, diseñamos pedidos por volumen con opciones de presentación pensadas para adaptarse al estilo de tu celebración.</p>
+            </div>
+            <div class="rules-block fade-up-element">
+                <p class="rules-block-title">Organizamos cada pedido contigo</p>
+                <ul class="rules-list">
+                    <li><strong>Pedido mínimo sugerido:</strong> 20 piezas.</li>
+                    <li><strong>Anticipo:</strong> 50% para confirmar tu pedido.</li>
+                    <li><strong>Tiempo recomendado:</strong> 72 horas de anticipación.</li>
+                    <li><strong>Entrega:</strong> recolección, entrega local con costo adicional o envío por plataforma.</li>
+                </ul>
+                <p class="rules-block-note">Para pedidos de celebración se recomienda un mínimo de 20 piezas. Para confirmar cualquier pedido especial solicitamos el 50% de anticipo. Recomendamos solicitar con al menos 72 horas de anticipación.</p>
+            </div>
+            <div class="celebraciones-cta fade-up-element">
+                <a href="https://wa.me/5210000000000?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido%20para%20celebraci%C3%B3n%20con%20Atelier%2042." class="btn-atelier btn-atelier-primary" target="_blank" rel="noopener noreferrer">Cotizar por WhatsApp</a>
+                <a href="#contact" class="btn-atelier btn-atelier-ghost-dark">Solicitar cotización</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentaciones -->
+    <section id="presentaciones" class="section section-presentaciones">
+        <div class="container">
+            <div class="section-header fade-up-element">
+                <span class="eyebrow">Empaque y mesa</span>
+                <h2>Elige la presentación ideal para tu evento</h2>
+            </div>
+            <div class="presentation-compare">
+                <article class="presentation-card fade-up-element">
+                    <h3>Celebración Esencial</h3>
+                    <p class="presentation-lead">Una presentación práctica y cuidada para pedidos por volumen, reuniones casuales o consumo inmediato.</p>
+                    <p class="presentation-subhead">Incluye</p>
+                    <ul>
+                        <li>Flanera clásica de aluminio AL-07.</li>
+                        <li>Lámina plástica como tapa.</li>
+                        <li>Liga.</li>
+                        <li>Cuchara.</li>
+                    </ul>
+                    <p class="presentation-subhead">Ideal para</p>
+                    <ul class="presentation-ideal">
+                        <li>Reuniones familiares.</li>
+                        <li>Pedidos sencillos.</li>
+                        <li>Consumo inmediato.</li>
+                        <li>Celebraciones casuales.</li>
+                    </ul>
+                </article>
+                <article class="presentation-card presentation-card-premium fade-up-element" style="transition-delay:0.12s">
+                    <h3>Celebración Atelier</h3>
+                    <p class="presentation-lead">Nuestra presentación premium, pensada para eventos donde cada detalle visual importa.</p>
+                    <p class="presentation-subhead">Incluye</p>
+                    <ul>
+                        <li>Molde de mayor capacidad.</li>
+                        <li>Interior dorado.</li>
+                        <li>Exterior de color según disponibilidad del proveedor (negro, rojo u otros).</li>
+                        <li>Tapa propia.</li>
+                        <li>Cuchara retro del color del molde.</li>
+                        <li>Opción de etiqueta personalizada.</li>
+                    </ul>
+                    <p class="presentation-subhead">Ideal para</p>
+                    <ul class="presentation-ideal">
+                        <li>Bautizos y cumpleaños.</li>
+                        <li>Eventos familiares.</li>
+                        <li>Detalles corporativos.</li>
+                        <li>Regalos personalizados.</li>
+                        <li>Mesas de postres.</li>
+                    </ul>
+                </article>
+            </div>
+            <p class="presentation-disclaimer fade-up-element">La disponibilidad de colores y empaques premium puede variar según proveedor. Te confirmaremos las opciones disponibles al momento de cotizar.</p>
+        </div>
+    </section>
+
+    <!-- Colección actual -->
+    <section id="creaciones" class="section section-creations">
+        <div class="container">
+            <div class="section-header fade-up-element">
+                <span class="eyebrow">Colección actual</span>
+                <h2>Nuestras creaciones</h2>
+                <p class="section-lead">Piezas de autor elaboradas bajo pedido. Precios orientativos; confirmamos disponibilidad y presentación al cotizar.</p>
             </div>
             <div class="creations-grid">
-                <!-- Babka -->
                 <article class="creation-card fade-up-element">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/babka/babka_cortado_closeup2.webp" alt="Croissant artesanal de mantequilla" loading="lazy">
+                            <img src="./assets/img/products/babka/babka_cortado_closeup2.webp" alt="Babka artesanal" loading="lazy">
                         </div>
-                        <span class="card-tag">Tamaño único</span>
+                        <span class="card-tag">Bajo pedido</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">10-12 porciones</span>
+                        <span class="card-category">10–12 porciones · $370.00 MXN</span>
                         <h3>Babka</h3>
-                        <p>Nuestra versión del pan originario de Europa del este, con el mismo nombre, hecho con mantequilla y trenzado de doble chocolate aromatizado.</p>
-                        <span class="card-price">$370.00 MXN</span>
+                        <p>Nuestra versión del pan originario de Europa del Este, hecho con mantequilla y trenzado de doble chocolate aromatizado.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Datíl D'Atelier -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.15s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/datil/datil1.webp" alt="Macarons de autor con sabores únicos" loading="lazy">
+                            <img src="./assets/img/products/datil/datil1.webp" alt="Datíl D'Atelier" loading="lazy">
                         </div>
-                        <span class="card-tag">Tamaño único</span>
+                        <span class="card-tag">Bajo pedido</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">6-8 porciones</span>
+                        <span class="card-category">6–8 porciones · $380 MXN</span>
                         <h3>Datíl D'Atelier</h3>
-                        <p>Suave bizcocho de datíl, estilo panqué, marmoleado con queso crema.</p>
-                        <span class="card-price">$380 MXN</span>
+                        <p>Suave bizcocho de dátil estilo panqué, marmoleado con queso crema.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Carrot Cake -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.3s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/carrotcake/carrotcake1.webp" alt="Tarta signature de alta repostería" loading="lazy">
+                            <img src="./assets/img/products/carrotcake/carrotcake1.webp" alt="Carrot Cake" loading="lazy">
                         </div>
-                        <span class="card-tag">Tamaño único</span>
+                        <span class="card-tag">Bajo pedido</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">10-12 porciones</span>
+                        <span class="card-category">10–12 porciones · $420 MXN</span>
                         <h3>Carrot Cake</h3>
                         <p>El clásico pastel de zanahoria con relleno y frosting de queso crema.</p>
-                        <span class="card-price">$420 MXN</span>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Roles de Canela -->
                 <article class="creation-card fade-up-element">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/roles/rol1.webp" alt="Croissant artesanal de mantequilla" loading="lazy">
+                            <img src="./assets/img/products/roles/rol1.webp" alt="Roles de Canela" loading="lazy">
                         </div>
                         <span class="card-tag">Paquete</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">4 porciones</span>
+                        <span class="card-category">4 piezas · $200.00 MXN</span>
                         <h3>Roles de Canela</h3>
-                        <p>4 roles de canela, esponjosos, con cobertura de queso crema estilo rústico.</p>
-                        <span class="card-price">$200.00 MXN</span>
+                        <p>Roles de canela esponjosos con cobertura de queso crema y acabado rústico.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Stock limitado / bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Banana Panqué -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.15s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/bananapanque/bananapanque1.webp" alt="Macarons de autor con sabores únicos" loading="lazy">
+                            <img src="./assets/img/products/bananapanque/bananapanque1.webp" alt="Banana Panqué" loading="lazy">
                         </div>
-                        <span class="card-tag">Tamaño único</span>
+                        <span class="card-tag">Bajo pedido</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">6-8 porciones</span>
+                        <span class="card-category">6–8 porciones · $240 MXN</span>
                         <h3>Banana Panqué</h3>
-                        <p>Nuestra versión del "banana bread" americano, decorado con un glaseado de azucar morena.</p>
-                        <span class="card-price">$240 MXN</span>
+                        <p>Nuestra versión del banana bread americano, decorado con glaseado de azúcar morena.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Tarte Normand -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.3s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/tartanormanda/tarta1.webp" alt="Tarta signature de alta repostería" loading="lazy">
+                            <img src="./assets/img/products/tartanormanda/tarta1.webp" alt="Tarte Normand" loading="lazy">
                         </div>
                         <span class="card-tag">Varios tamaños</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">Individual o 10-12 porciones</span>
+                        <span class="card-category">Individual o 10–12 porciones · $40 / $320 MXN</span>
                         <h3>Tarte Normand</h3>
-                        <p>Nuestra version de la tarta Normanda de manzanas originaria de Francia.</p>
-                        <span class="card-price">$40 MXN o $320 MXN</span>
+                        <p>Nuestra versión de la tarta normanda de manzana, inspirada en la repostería francesa.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Raspberry Chessecake Sticks -->
                 <article class="creation-card fade-up-element">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="./assets/img/products/babka/babka_cortado_closeup2.webp" alt="Croissant artesanal de mantequilla" loading="lazy">
+                            <img src="./assets/img/products/babka/babka_cortado_closeup2.webp" alt="Raspberry Cheesecake Sticks" loading="lazy">
                         </div>
-                        <span class="card-tag">Individual</span>
+                        <span class="card-tag">Individual o paquete</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">Porcion única o paquete</span>
-                        <h3>Raspberry Chessecake Sticks</h3>
-                        <p>Detalles.</p>
-                        <span class="card-price">$150.00 MXN</span>
+                        <span class="card-category">Porción única o paquete · $150.00 MXN</span>
+                        <h3>Raspberry Cheesecake Sticks</h3>
+                        <p>Barras cremosas de cheesecake con frambuesa, pensadas para disfrutarse como porción individual o integrarse en pedidos para evento.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Evento / individual</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Mango Chessecake -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.15s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80&w=600" alt="Macarons de autor con sabores únicos" loading="lazy">
+                            <!-- TODO: Sustituir por foto propia en assets/img/products/ -->
+                            <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80&w=600" alt="Mango Cheesecake" loading="lazy">
                         </div>
-                        <span class="card-tag">Varios tamaños</span>
+                        <span class="card-tag">Petit Gâteau</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">Petit Gâteau</span>
-                        <h3>Mango Chessecake</h3>
-                        <p>Super creamy, fresco y con ese aroma tan caracteristico del mango.</p>
-                        <span class="card-price">$380 MXN</span>
+                        <span class="card-category">$380 MXN</span>
+                        <h3>Mango Cheesecake</h3>
+                        <p>Cheesecake cremoso y fresco con el aroma característico del mango.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Bajo pedido</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                <!-- Flan -->
                 <article class="creation-card fade-up-element" style="transition-delay:0.3s">
                     <div class="card-image-wrapper">
                         <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600" alt="Tarta signature de alta repostería" loading="lazy">
+                            <!-- TODO: Sustituir por foto propia en assets/img/products/ -->
+                            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&q=80&w=600" alt="Flan individual" loading="lazy">
                         </div>
                         <span class="card-tag">Encargo</span>
                     </div>
                     <div class="card-content">
-                        <span class="card-category">Alta Repostería</span>
+                        <span class="card-category">$25 MXN</span>
                         <h3>Flan</h3>
-                        <p>¿Se necesita una descripción?</p>
-                        <span class="card-price">$25 MXN</span>
+                        <p>Flan individual de textura suave y sabor clásico, ideal para pedidos por pieza, celebraciones y eventos.</p>
+                        <p class="card-meta-line"><span class="card-meta-label">Modalidad</span> Evento / por pieza</p>
+                        <a href="#contact" class="card-cta">Consultar pedido</a>
                     </div>
                 </article>
-                
             </div>
         </div>
     </section>
 
+    <!-- Cómo hacer tu pedido -->
+    <section id="como-pedir" class="section section-como-pedir">
+        <div class="container">
+            <div class="section-header fade-up-element">
+                <span class="eyebrow">Proceso</span>
+                <h2>Cómo hacer tu pedido</h2>
+            </div>
+            <ol class="steps-list fade-up-element">
+                <li>
+                    <span class="steps-number">1</span>
+                    <div class="steps-body">
+                        <h3>Elige tu producto o servicio</h3>
+                        <p>Selecciona una pieza para compartir, postres individuales para evento o una presentación personalizada.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="steps-number">2</span>
+                    <div class="steps-body">
+                        <h3>Cuéntanos fecha y cantidad</h3>
+                        <p>Te pediremos la fecha del evento, número de piezas, presentación deseada y si necesitas entrega.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="steps-number">3</span>
+                    <div class="steps-body">
+                        <h3>Confirmamos disponibilidad</h3>
+                        <p>Revisamos tiempos de producción, empaque disponible y zona de entrega.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="steps-number">4</span>
+                    <div class="steps-body">
+                        <h3>Agenda con anticipo</h3>
+                        <p>Para confirmar tu pedido solicitamos el 50% de anticipo.</p>
+                    </div>
+                </li>
+                <li>
+                    <span class="steps-number">5</span>
+                    <div class="steps-body">
+                        <h3>Recibe o recoge tu pedido</h3>
+                        <p>Puedes recogerlo, solicitar entrega local con costo adicional o coordinar envío por plataforma.</p>
+                    </div>
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- Filosofía -->
     <section id="about" class="section section-about">
         <div class="container">
             <div class="about-layout">
                 <div class="about-image-col fade-up-element">
                     <div class="about-image-main">
-                        <img src="https://images.unsplash.com/photo-1582210874945-8c0861118749?auto=format&fit=crop&q=80&w=800" alt="Interior minimalista de Atelier 42" loading="lazy">
+                        <img src="https://images.unsplash.com/photo-1582210874945-8c0861118749?auto=format&fit=crop&q=80&w=800" alt="Taller y ambiente Atelier 42" loading="lazy">
                     </div>
                     <div class="about-image-accent">
                         <img src="https://images.unsplash.com/photo-1486427944544-d2c246c4df4a?auto=format&fit=crop&q=80&w=400" alt="Detalle de elaboración artesanal" loading="lazy">
                     </div>
                 </div>
                 <div class="about-text-col fade-up-element" style="transition-delay:0.2s">
-                    <span class="eyebrow">Nuestra Filosofía</span>
-                    <h2>Nacidos de la pasión por la <em>excelencia</em></h2>
+                    <span class="eyebrow">Sobre nosotros</span>
+                    <h2>Hecho con calma, pensado para celebrar</h2>
                     <div class="about-body">
-                        <p>En Atelier 42, no hacemos pasteles — esculpimos emociones. Fundada bajo los principios de la estética minimalista y el respeto absoluto por el producto, nuestra boutique es un santuario para los paladares más exigentes.</p>
-                        <p>Cada pieza que abandona nuestro mostrador es el resultado de horas de perfeccionamiento silencioso: desde el temperado exacto del chocolate hasta el tostado preciso de las avellanas del Piamonte. Es un proceso lento, deliberado, y profundamente personal.</p>
+                        <p>Atelier 42 nace de la pasión por la repostería artesanal y el cuidado por los detalles. Cada pedido se prepara con intención, buscando que el sabor, la textura y la presentación acompañen momentos especiales.</p>
+                        <p>Creemos en una repostería honesta: procesos cuidados, ingredientes seleccionados y piezas hechas bajo pedido para conservar frescura y calidad.</p>
                     </div>
-                    <div class="about-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">7</span>
-                            <span class="stat-label">Años de trayectoria</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">42</span>
-                            <span class="stat-label">Creaciones activas</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">12</span>
-                            <span class="stat-label">Orígenes de cacao</span>
-                        </div>
+                    <div class="about-badges">
+                        <span class="about-badge">Producción bajo pedido</span>
+                        <span class="about-badge">Presentación personalizable</span>
+                        <span class="about-badge">Atención directa</span>
+                        <span class="about-badge">Hecho en Puebla</span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="*" class="section section-features">
-        <div class="container">
-            <div class="section-header fade-up-element">
-                <span class="eyebrow">La Diferencia</span>
-                <h2>Por qué Atelier 42</h2>
-            </div>
-            <div class="features-grid fade-up-element">
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-                    </div>
-                    <span class="feature-number">01</span>
-                    <h3>Precisión Absoluta</h3>
-                    <p>Cada gramo importa. Nuestra repostería está basada en el rigor científico, asegurando una constancia sublime en cada bocado que servimos.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                    </div>
-                    <span class="feature-number">02</span>
-                    <h3>Origen Noble</h3>
-                    <p>Solo trabajamos con pequeños productores artesanales. Vainilla de Tahití, chocolate de origen único, mantequilla AOC y lácteos de granja.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
-                    </div>
-                    <span class="feature-number">03</span>
-                    <h3>Estética Depurada</h3>
-                    <p>Comemos con los ojos. Nuestras creaciones se despojan de lo excesivo para celebrar la belleza en su forma más pura y honesta.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-                    </div>
-                    <span class="feature-number">04</span>
-                    <h3>Alma Artesanal</h3>
-                    <p>Cada pieza es tocada por manos expertas en cada etapa de su creación. Sin automatización, sin atajos — solo dedicación genuina.</p>
                 </div>
             </div>
         </div>
@@ -293,8 +416,8 @@
     <section class="section section-quote">
         <div class="container">
             <blockquote class="editorial-quote fade-up-element">
-                <p>“La pastelería es geometría comestible — cada ángulo, cada capa, cada proporción tiene un propósito.”</p>
-                <cite>— Equipo Creativo, Atelier 42</cite>
+                <p>“Celebrar es compartir sabor; cada mesa merece el mismo cuidado que la receta.”</p>
+                <cite>— Atelier 42</cite>
             </blockquote>
         </div>
     </section>
@@ -304,31 +427,32 @@
             <div class="section-header text-center fade-up-element">
                 <span class="eyebrow">Visual</span>
                 <h2>Galería</h2>
+                <p class="section-lead gallery-lead">Imágenes de referencia; sustituir por fotografía propia cuando sea posible.</p>
             </div>
             <div class="gallery-grid fade-up-element">
                 <div class="gallery-item gallery-item-tall">
-                    <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&q=80&w=800" alt="Tarta artesanal con decoración minimalista" loading="lazy">
-                    <div class="gallery-overlay"><span>Tartas</span></div>
+                    <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&q=80&w=800" alt="Celebraciones" loading="lazy">
+                    <div class="gallery-overlay"><span>Celebraciones</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1627998687784-db72be3f97da?auto=format&fit=crop&q=80&w=800" alt="Detalle de pastelería fina" loading="lazy">
-                    <div class="gallery-overlay"><span>Detalle</span></div>
+                    <img src="https://images.unsplash.com/photo-1627998687784-db72be3f97da?auto=format&fit=crop&q=80&w=800" alt="Detalles" loading="lazy">
+                    <div class="gallery-overlay"><span>Detalles</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=800" alt="Texturas y acabados de repostería" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493?auto=format&fit=crop&q=80&w=800" alt="Texturas" loading="lazy">
                     <div class="gallery-overlay"><span>Texturas</span></div>
                 </div>
                 <div class="gallery-item gallery-item-wide">
-                    <img src="https://images.unsplash.com/photo-1625937712144-7ca1b439e6a9?auto=format&fit=crop&q=80&w=1200" alt="Proceso de elaboración artesanal" loading="lazy">
+                    <img src="https://images.unsplash.com/photo-1625937712144-7ca1b439e6a9?auto=format&fit=crop&q=80&w=1200" alt="Proceso" loading="lazy">
                     <div class="gallery-overlay"><span>Proceso</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?auto=format&fit=crop&q=80&w=600" alt="Croissants recién horneados" loading="lazy">
-                    <div class="gallery-overlay"><span>Horneado</span></div>
+                    <img src="https://images.unsplash.com/photo-1558326567-98ae2405596b?auto=format&fit=crop&q=80&w=600" alt="Piezas para compartir" loading="lazy">
+                    <div class="gallery-overlay"><span>Piezas para compartir</span></div>
                 </div>
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&q=80&w=600" alt="Chocolate artesanal" loading="lazy">
-                    <div class="gallery-overlay"><span>Chocolate</span></div>
+                    <img src="https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&q=80&w=600" alt="Presentación premium" loading="lazy">
+                    <div class="gallery-overlay"><span>Presentación premium</span></div>
                 </div>
             </div>
         </div>
@@ -338,54 +462,101 @@
         <div class="container">
             <div class="contact-layout">
                 <div class="contact-info fade-up-element">
-                    <span class="eyebrow">Contacto</span>
-                    <h2>Háganos parte de su <em>celebración</em></h2>
-                    <p class="contact-lead">Aceptamos encargos personalizados y reservaciones para eventos privados. Permítanos diseñar algo inolvidable para usted.</p>
+                    <span class="eyebrow">Cotización</span>
+                    <h2>Cuéntanos sobre tu <em>evento</em></h2>
+                    <p class="contact-lead">Completa el formulario o escríbenos por WhatsApp. Respondemos con disponibilidad y opciones de presentación.</p>
                     <div class="contact-details">
                         <div class="contact-detail-item">
-                            <span class="detail-label">Dirección</span>
-                            <span class="detail-value">Avenida de la Luz 42<br>Distrito Financiero</span>
+                            <span class="detail-label">Ubicación</span>
+                            <span class="detail-value">Puebla, México</span>
                         </div>
                         <div class="contact-detail-item">
-                            <span class="detail-label">Teléfono</span>
-                            <span class="detail-value">+34 912 420 042</span>
+                            <span class="detail-label">WhatsApp</span>
+                            <span class="detail-value"><a href="https://wa.me/5210000000000?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido%20para%20celebraci%C3%B3n%20con%20Atelier%2042." target="_blank" rel="noopener noreferrer">Cotizar por chat</a><!-- TODO: número real --></span>
                         </div>
                         <div class="contact-detail-item">
-                            <span class="detail-label">Correo</span>
-                            <span class="detail-value">hola@atelier42.es</span>
+                            <span class="detail-label">Instagram</span>
+                            <span class="detail-value"><a href="#" id="instagramLink">@atelier42</a><!-- TODO: URL real de Instagram --></span>
+                        </div>
+                        <div class="contact-detail-item">
+                            <span class="detail-label">Horario</span>
+                            <span class="detail-value">Pedidos bajo agenda</span>
                         </div>
                     </div>
+                    <p class="contact-disclaimer">Producción bajo pedido. Recomendamos solicitar con anticipación.</p>
                 </div>
                 <div class="contact-form-wrapper fade-up-element" style="transition-delay:0.2s">
-                    <form class="inquiry-form" id="contactForm">
+                    <!-- TODO: Conectar action con Formspree u otro endpoint al definirlo -->
+                    <form class="inquiry-form" id="contactForm" method="post" action="#">
                         <div class="form-group">
-                            <input type="text" id="name" required placeholder=" ">
-                            <label for="name">Nombre Completo</label>
+                            <input type="text" id="name" name="name" required placeholder=" " autocomplete="name">
+                            <label for="name">Nombre</label>
                             <div class="form-line"></div>
                         </div>
                         <div class="form-group">
-                            <input type="email" id="email" required placeholder=" ">
-                            <label for="email">Correo Electrónico</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" required placeholder=" " autocomplete="tel">
+                            <label for="whatsapp">WhatsApp</label>
                             <div class="form-line"></div>
                         </div>
                         <div class="form-group">
-                            <select id="subject" required>
+                            <input type="email" id="email" name="email" placeholder=" ">
+                            <label for="email">Correo electrónico (opcional)</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <select id="requestType" name="requestType" required>
                                 <option value="" disabled selected></option>
-                                <option value="encargo">Encargo Personalizado</option>
-                                <option value="evento">Evento Privado</option>
-                                <option value="corporativo">Corporativo</option>
-                                <option value="otro">Otra Consulta</option>
+                                <option value="celebracion">Celebración / evento</option>
+                                <option value="pieza">Pieza para compartir</option>
+                                <option value="corporativo">Pedido corporativo</option>
+                                <option value="edicion">Edición especial</option>
+                                <option value="otro">Otra consulta</option>
                             </select>
-                            <label for="subject">Tipo de Consulta</label>
+                            <label for="requestType">Tipo de solicitud</label>
                             <div class="form-line"></div>
                         </div>
                         <div class="form-group">
-                            <textarea id="message" required placeholder=" " rows="4"></textarea>
-                            <label for="message">Detalles de su consulta</label>
+                            <input type="text" id="eventDate" name="eventDate" required placeholder=" ">
+                            <label for="eventDate">Fecha del evento o entrega</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="quantity" name="quantity" required placeholder=" ">
+                            <label for="quantity">Cantidad estimada de piezas</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="productInterest" name="productInterest" placeholder=" ">
+                            <label for="productInterest">Producto de interés</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <select id="presentation" name="presentation" required>
+                                <option value="" disabled selected></option>
+                                <option value="esencial">Esencial</option>
+                                <option value="atelier">Atelier / premium</option>
+                                <option value="no-se">Aún no sé</option>
+                            </select>
+                            <label for="presentation">Presentación deseada</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <select id="delivery" name="delivery" required>
+                                <option value="" disabled selected></option>
+                                <option value="recoleccion">Recolección</option>
+                                <option value="local">Entrega local</option>
+                                <option value="plataforma">Envío por plataforma</option>
+                            </select>
+                            <label for="delivery">Modalidad de entrega</label>
+                            <div class="form-line"></div>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" required placeholder=" " rows="4"></textarea>
+                            <label for="message">Mensaje adicional</label>
                             <div class="form-line"></div>
                         </div>
                         <button type="submit" class="btn-atelier btn-atelier-dark">
-                            <span class="btn-text">Enviar Consulta</span>
+                            <span class="btn-text">Solicitar cotización</span>
                             <span class="btn-arrow">→</span>
                         </button>
                     </form>
@@ -399,23 +570,25 @@
             <div class="footer-top">
                 <div class="footer-brand">
                     <h2 class="footer-logo">Atelier <span>42</span></h2>
-                    <p>Elevando la pastelería contemporánea desde 2018.</p>
+                    <p>Repostería boutique · Puebla, México</p>
+                    <p class="footer-tagline">Producción bajo pedido. Recomendamos solicitar con anticipación.</p>
                 </div>
                 <div class="footer-links">
                     <div class="footer-col">
-                        <h4>Visítenos</h4>
-                        <p>Avenida de la Luz 42<br>Distrito Financiero<br>Ciudad Metropolitana</p>
+                        <h4>Contacto</h4>
+                        <p><a href="https://wa.me/5210000000000?text=Hola%2C%20me%20gustar%C3%ADa%20cotizar%20un%20pedido%20para%20celebraci%C3%B3n%20con%20Atelier%2042." target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+                        <p><a href="#" id="footerInstagram">Instagram</a><!-- TODO: URL real --></p>
                     </div>
                     <div class="footer-col">
                         <h4>Horario</h4>
-                        <p>Mar – Sáb: 9:00 – 19:00<br>Dom: 10:00 – 16:00<br>Lunes: Cerrado</p>
+                        <p>Pedidos bajo agenda</p>
                     </div>
                     <div class="footer-col">
-                        <h4>Social</h4>
+                        <h4>Enlaces</h4>
                         <div class="footer-social">
-                            <a href="#">Instagram</a>
-                            <a href="#">Pinterest</a>
-                            <a href="#">Journal</a>
+                            <a href="#contact">Cotizar</a>
+                            <a href="#servicios">Servicios</a>
+                            <a href="#creaciones">Creaciones</a>
                         </div>
                     </div>
                 </div>
@@ -423,8 +596,8 @@
             <div class="footer-bottom">
                 <p>© 2026 Atelier 42. Todos los derechos reservados.</p>
                 <div class="legal-links">
-                    <a href="#">Privacidad</a>
-                    <a href="#">Términos</a>
+                    <a href="#">Privacidad</a><!-- TODO: enlazar política real si existe -->
+                    <a href="#">Términos</a><!-- TODO: enlazar términos reales si existen -->
                 </div>
             </div>
         </div>
