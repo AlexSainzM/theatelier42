@@ -368,6 +368,17 @@ em {
     margin: 2rem auto;
 }
 
+.hero-tagline {
+    font-family: var(--font-sans);
+    font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 560px;
+    margin: 0 auto 1rem;
+    line-height: 1.65;
+}
+
 .hero-subtitle {
     font-size: clamp(1rem, 1.5vw, 1.15rem);
     color: rgba(255, 255, 255, 0.7);
@@ -847,6 +858,47 @@ em {
 
 .section-creations {
     background: var(--white);
+}
+
+.products-pricing-note {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--mid-gray);
+    max-width: 560px;
+    margin: 0 auto clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.65;
+    font-style: italic;
+}
+
+.whatsapp-fab {
+    display: none;
+    position: fixed;
+    right: 1rem;
+    bottom: 1.25rem;
+    z-index: 900;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.9rem 1.15rem;
+    background: var(--near-black);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(15, 14, 13, 0.2);
+    transition: background var(--transition-base), transform var(--transition-base), opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.whatsapp-fab:hover {
+    background: var(--charcoal);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+.whatsapp-fab.whatsapp-fab--hidden {
+    visibility: hidden;
+    pointer-events: none;
+    opacity: 0;
 }
 
 .creations-grid {
@@ -1482,6 +1534,12 @@ em {
 }
 
 @media (max-width: 767px) {
+    .whatsapp-fab {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
     .nav-links {
         position: fixed;
         top: 0;
